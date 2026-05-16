@@ -46,22 +46,24 @@ abstract class Skills {
 
 // Step 4: Developer class
 class Developer extends Employee implements Skills {
-  Developer(String name, int age, double salary) : super(name, age, salary);
+  Developer(String name, int age, double salary)
+      : super(name, age, salary);
 
   @override
   void programming() {
-    print("Programming skill: Dart developer");
+    print("Programming skill: Flutter developer");
   }
 
   @override
   void communication() {
-    print("Communication skill: Good team communication");
+    print("Communication skill: Good teamwork");
   }
 }
 
 // Step 5: Main function
 void main() {
-  Developer dev = Developer("Ahmed", 25, 8000);
+  Developer dev = Developer("Remon Adel", 22, 8000);
+
   dev.showInfo();
   dev.programming();
   dev.communication();
