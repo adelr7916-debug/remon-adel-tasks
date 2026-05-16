@@ -1,29 +1,29 @@
 import 'dart:io';
 
 void main() {
-  List<String> names = [];
-  List<List<double>> grades = [];
+  List<String> studentNames = [];
+  List<List<double>> studentGrades = [];
 
-  print("Enter number of students: ");
-  int n = int.parse(stdin.readLineSync()!);
+  print("Enter number of students:");
+  int numberOfStudents = int.parse(stdin.readLineSync()!);
 
-  for (int i = 0; i < n; i++) {
-    print("Enter student name: ");
+  for (int i = 0; i < numberOfStudents; i++) {
+    print("Enter student name:");
     String name = stdin.readLineSync()!;
-    names.add(name);
+    studentNames.add(name);
 
-    print("Enter number of subjects: ");
-    int subjects = int.parse(stdin.readLineSync()!);
+    print("Enter number of subjects:");
+    int numberOfSubjects = int.parse(stdin.readLineSync()!);
 
-    List<double> studentGrades = [];
+    List<double> grades = [];
 
-    for (int j = 0; j < subjects; j++) {
-      print("Enter grade: ");
+    for (int j = 0; j < numberOfSubjects; j++) {
+      print("Enter grade:");
       double grade = double.parse(stdin.readLineSync()!);
-      studentGrades.add(grade);
+      grades.add(grade);
     }
 
-    grades.add(studentGrades);
+    studentGrades.add(grades);
   }
 
   while (true) {
@@ -31,55 +31,59 @@ void main() {
     print("2- Search Student");
     print("3- Exit");
 
-    print("Choose: ");
+    print("Choose:");
     int choice = int.parse(stdin.readLineSync()!);
 
     if (choice == 1) {
-      for (int i = 0; i < names.length; i++) {
+      for (int i = 0; i < studentNames.length; i++) {
         double sum = 0;
 
-        for (double g in grades[i]) {
-          sum += g;
+        for (double grade in studentGrades[i]) {
+          sum += grade;
         }
 
-        double avg = sum / grades[i].length;
+        double average = sum / studentGrades[i].length;
 
-        String grade;
-        if (avg >= 90) {
-          grade = "A";
-        } else if (avg >= 75) {
-          grade = "B";
-        } else if (avg >= 60) {
-          grade = "C";
+        String finalGrade;
+
+        if (average >= 90) {
+          finalGrade = "A";
+        } else if (average >= 75) {
+          finalGrade = "B";
+        } else if (average >= 60) {
+          finalGrade = "C";
         } else {
-          grade = "F";
+          finalGrade = "F";
         }
 
-        print("${names[i]} - Average: ${avg.toStringAsFixed(2)} - Grade: $grade");
+        print(
+            "${studentNames[i]} - Average: ${average.toStringAsFixed(2)} - Grade: $finalGrade");
       }
-    }
+    } else if (choice == 2) {
+      print("Enter student name:");
+      String searchName = stdin.readLineSync()!;
 
-    else if (choice == 2) {
-      print("Enter student name: ");
-      String search = stdin.readLineSync()!;
-
-      int index = names.indexOf(search);
+      int index = studentNames.indexOf(searchName);
 
       if (index == -1) {
         print("Student not found");
       } else {
         double sum = 0;
-        for (double g in grades[index]) {
-          sum += g;
+
+        for (double grade in studentGrades[index]) {
+          sum += grade;
         }
 
-        double avg = sum / grades[index].length;
-        print("${names[index]} Average: ${avg.round()}");
-      }
-    }
+        double average = sum / studentGrades[index].length;
 
-    else if (choice == 3) {
+        print(
+            "${studentNames[index]} Average: ${average.toStringAsFixed(2)}");
+      }
+    } else if (choice == 3) {
+      print("Program closed");
       break;
+    } else {
+      print("Invalid choice");
     }
   }
 }
